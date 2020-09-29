@@ -99,7 +99,7 @@ class Product extends Command
         $this->state->setAreaCode(Area::AREA_GLOBAL);
 
         $generate = $input->getArgument(self::GENERATE_ARGUMENT) ?: false;
-        $image = $input->getArgument(self::IMAGE_ARGUMENT) ?: false;
+        $image = $this->input->getOption(self::IMAGE_ARGUMENT) ?: false;
         $websiteId = $this->input->getOption(self::WEBSITE_OPTION) ?: 1;
         $limit = $this->input->getOption(self::LIMIT_OPTION) ?: 5;
 
@@ -155,7 +155,7 @@ class Product extends Command
 
     /**
      * {@inheritdoc}
-     * xigen:faker:product [-w|--website WEBSITE] [-l|--limit [LIMIT]] [-t|--type [TYPE]] [--] <generate> <applyImage>.
+     * xigen:faker:product [-w|--website WEBSITE] [-l|--limit [LIMIT]] [-a|--applyImage [TRUE/FALSE]] [-t|--type [TYPE]] [--] <generate>.
      */
     protected function configure()
     {
@@ -163,7 +163,7 @@ class Product extends Command
         $this->setDescription('Generate fake product');
         $this->setDefinition([
             new InputArgument(self::GENERATE_ARGUMENT, InputArgument::REQUIRED, 'Generate'),
-            new InputArgument(self::IMAGE_ARGUMENT, InputArgument::OPTIONAL, 'Apply Image'),
+            new InputOption(self::IMAGE_ARGUMENT, '-a', InputOption::VALUE_OPTIONAL, 'Apply Image'),
             new InputOption(self::WEBSITE_OPTION, '-w', InputOption::VALUE_REQUIRED, 'Website Id'),
             new InputOption(self::TYPE_OPTION, '-t', InputOption::VALUE_REQUIRED, 'Type Id'),
             new InputOption(self::LIMIT_OPTION, '-l', InputOption::VALUE_OPTIONAL, 'Limit'),
